@@ -1,0 +1,6 @@
+{
+  "html.format.wrapAttributes": "force-aligned",
+  "html.format.wrapLineLength": 500,
+  "html.format.wrapAttributesIndentSize": 50,
+  "html.format.enable": false
+}

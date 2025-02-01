@@ -13,18 +13,19 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- close window before select with o
 vim.api.nvim_create_autocmd("FileType", {
   callback = function()
-    local bufnr = vim.fn.bufnr('%')
+    local bufnr = vim.fn.bufnr("%")
     vim.keymap.set("n", "o", function()
       vim.api.nvim_command([[execute "normal! \<cr>"]])
-      vim.api.nvim_command(bufnr .. 'bd')
+      vim.api.nvim_command(bufnr .. "bd")
     end, { buffer = bufnr })
   end,
   pattern = "qf",
 })
 
 -- lint on save
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  callback = function()
-    require("lint").try_lint()
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
   end,
 })

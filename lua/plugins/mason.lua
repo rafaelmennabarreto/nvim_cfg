@@ -15,6 +15,8 @@ return {
         "stylua",
         "tailwindcss-language-server",
       })
+
+      opts.automatic_installation = false
     end
   }
 }

@@ -102,7 +102,7 @@ Map("n", "<leader>sp", "<Cmd>FzfLua grep_project<CR>", Opt('Search word'))
 -- lsp remap
 local keys = require("lazyvim.plugins.lsp.keymaps").get()
 
--- change a keymap
+-- lsp
 keys[#keys + 1] = { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "implementation" }
 keys[#keys + 1] = { "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" }
 keys[#keys + 1] = { "<leader>ff", "<Cmd>lua vim.lsp.buf.format()<CR>", desc = "Format" }

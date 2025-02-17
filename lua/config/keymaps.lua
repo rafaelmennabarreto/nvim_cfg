@@ -4,7 +4,7 @@
 vim.g.mapleader = " "
 vim.g.ctrlp_show_hidden = 1
 
-function Map(mode, key, command, opt)
+function Map(mode, key, command, opt, desc)
   vim.api.nvim_set_keymap(mode, key, command, opt or Opt())
 end
 
@@ -13,7 +13,7 @@ function Opt(desc, silent, noremap, expr)
     silent = silent or true,
     noremap = noremap or true,
     expr = expr or false,
-    desc = desc or nil
+    desc = desc or nil,
   }
 end
 
@@ -33,7 +33,7 @@ Map("i", "jj", "<Esc>", Opt())
 Map("i", "kk", "<Esc>", Opt())
 Map("i", "<C-e>", "<Esc> <S-$>a", Opt())
 
-Map("n", "W", "ciw", Opt())     -- change word
+Map("n", "W", "ciw", Opt()) -- change word
 Map("n", "<C-d>", "yyp", Opt()) -- duplicate line
 
 -- Window
@@ -69,11 +69,6 @@ Map("n", "gc", "<plug>NERDCommenterToggle", Opt())
 Map("v", "gc", "<plug>NERDCommenterToggle", Opt())
 Map("x", "gc", "<plug>NERDCommenterToggle", Opt())
 
--- git
-Map("n", "<leader>og", "<cmd> Git<cr>", Opt())
-Map("n", "<leader>gb", "<cmd> Gitsigns blame_line<cr>", Opt())
-Map("n", "<leader>gc", "<cmd> Telescope git_commits layout_strategy=horizontal<cr>", Opt())
-
 -- better wrap line
 Map("n", "<C-j>", "i<cr><Tab><esc>", Opt())
 Map("n", "<C-k>", "hvb<S-e>ld<esc>", Opt())
@@ -90,14 +85,13 @@ Map("n", "<C-j>", ":<C-U>TmuxNavigateDown<cr>")
 Map("n", "<C-k>", ":<C-U>TmuxNavigateUp<cr>")
 Map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 
-
 -- editor
 Map("n", "<leader>fr", ":source<CR> <bar>:lua vim.notify('File reloaded')<cr>", Opt())
 Map("n", "<leader>ff", "<Cmd>lua vim.lsp.buf.format()<CR>", Opt())
 
 --FZF lua
-Map("n", "<leader>sf", "<Cmd>FzfLua files<CR>", Opt('Find files'))
-Map("n", "<leader>sp", "<Cmd>FzfLua grep_project<CR>", Opt('Search word'))
+Map("n", "<leader>sf", "<Cmd>FzfLua files<CR>", Opt("Find files"))
+Map("n", "<leader>sp", "<Cmd>FzfLua grep_project<CR>", Opt("Search word"))
 
 -- lsp remap
 local keys = require("lazyvim.plugins.lsp.keymaps").get()

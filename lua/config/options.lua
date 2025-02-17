@@ -7,5 +7,4 @@ vim.opt.shiftwidth = 2 -- Number of spaces for each indentation
 vim.opt.tabstop = 2 -- Number of spaces that a tab counts for
 vim.opt.softtabstop = 2
 vim.g.autoformat = true
-vim.b.autoformat = false
 vim.opt.fileformats = { "unix", "dos" }

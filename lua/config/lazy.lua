@@ -31,10 +31,10 @@ require("lazy").setup({
   },
   install = {
     colorscheme = {
+      "catpuccin",
       "tokyonight",
       "habamax",
-      "catpuccin"
-    }
+    },
   },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {

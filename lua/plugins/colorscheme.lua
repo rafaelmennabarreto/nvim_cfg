@@ -1,17 +1,32 @@
 return {
   {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "catppuccin",
+    },
+  },
+  {
+    "folke/tokyonight.nvim",
+    enabled = false,
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
+  {
     "catppuccin/nvim",
     name = "catppuccin",
-    enabled = false,
+    enabled = true,
     priority = 1000,
-    opts = function()
+    init = function()
       require("catppuccin").setup({
-        flavour = "auto",               -- latte, frappe, macchiato, mocha
-        transparent_background = false, -- disables setting the background color.
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        transparent_background = true, -- disables setting the background color.
       })
-
-      vim.cmd("colorscheme catppuccin")
-    end
+    end,
   },
   {
     "rose-pine/neovim",
@@ -27,13 +42,11 @@ return {
           transparency = true,
         },
       })
-
-      vim.cmd("colorscheme rose-pine")
     end,
   },
   {
     "rebelot/kanagawa.nvim",
-    enabled = true,
+    enabled = false,
     opts = function()
       require("kanagawa").setup({
         compile = false,
@@ -43,14 +56,12 @@ return {
           theme = {
             all = {
               ui = {
-                bg_gutter = "none"
-              }
-            }
-          }
+                bg_gutter = "none",
+              },
+            },
+          },
         },
       })
-
-      vim.cmd("colorscheme kanagawa")
-    end
+    end,
   },
 }

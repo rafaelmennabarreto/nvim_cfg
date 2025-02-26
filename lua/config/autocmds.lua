@@ -23,9 +23,14 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- lint on save
+
+
+
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function(args)
-    require("conform").format({ bufnr = args.buf })
+    if vim.g.autoformat then
+      require("conform").format({ bufnr = args.buf })
+    end
   end,
 })

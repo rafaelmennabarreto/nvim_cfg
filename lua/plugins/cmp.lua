@@ -12,10 +12,10 @@ return {
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
-    local luasnip          = require("luasnip")
-    local cmp              = require("cmp")
+    local luasnip = require("luasnip")
+    local cmp = require("cmp")
 
-    opts.mapping           = vim.tbl_extend("force", opts.mapping, {
+    opts.mapping = vim.tbl_extend("force", opts.mapping, {
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
@@ -41,12 +41,11 @@ return {
       end, { "i", "s" }),
     })
 
-    local source_names     = {
+    local source_names = {
       nvim_lsp = "[LSP]",
       emoji = "[Emoji]",
       path = "[Path]",
       calc = "[Calc]",
-      cmp_tabnine = "[Tabnine]",
       vsnip = "[Snippet]",
       luasnip = "[Snippet]",
       buffer = "[Buffer]",
@@ -54,7 +53,7 @@ return {
       codeium = "[IA]",
     }
 
-    local icons            = {
+    local icons = {
       Constructor = "  ",
       Function = "  ",
       Keyword = "  ",
@@ -66,51 +65,51 @@ return {
       Field = "  ",
       Property = "  ",
       Constant = "  ",
-      Array = '  ',
-      Boolean = '  ',
-      Color = '  ',
-      Enum = '  ',
-      EnumMember = '  ',
-      Event = '  ',
-      File = '  ',
-      Folder = '  ',
-      Interface = '  ',
-      Key = '  ',
-      Namespace = '  ',
-      Null = ' ﳠ ',
-      Number = '  ',
-      Object = '  ',
-      Operator = '  ',
-      Package = '  ',
-      Reference = '  ',
-      String = '  ',
-      Struct = '  ',
-      TypeParameter = '  ',
-      Unit = '  ',
-      Value = '  ',
-      Win = '  ',
-      Codeium = "  ",
+      Array = "  ",
+      Boolean = "  ",
+      Color = "  ",
+      Enum = "  ",
+      EnumMember = "  ",
+      Event = "  ",
+      File = "  ",
+      Folder = "  ",
+      Interface = "  ",
+      Key = "  ",
+      Namespace = "  ",
+      Null = " ﳠ ",
+      Number = "  ",
+      Object = "  ",
+      Operator = "  ",
+      Package = "  ",
+      Reference = "  ",
+      String = "  ",
+      Struct = "  ",
+      TypeParameter = "  ",
+      Unit = "  ",
+      Value = "  ",
+      Win = "  ",
+      Codeium = "  ",
       Class = "  ",
     }
 
-    opts.window            = {
+    opts.window = {
       completion = {
-        border = 'rounded',
+        border = "rounded",
         --col_offset = -3,
         --side_padding = 0,
-        winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
       },
       documentation = {
-        border = 'rounded',
+        border = "rounded",
         --col_offset = -3,
         --side_padding = 0,
-        winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
-      }
+        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+      },
       --documentation = cmp.config.window.bordered(),
     }
 
-    opts.formatting        = {
-      mode = 'symbol_text',
+    opts.formatting = {
+      mode = "symbol_text",
       fields = { "abbr", "kind", "menu" },
       expandable_indicator = true,
       max_width = 0,
@@ -121,9 +120,9 @@ return {
         vim_item.kind = (icons[vim_item.kind] or vim_item.kind)
 
         return vim_item
-      end
+      end,
     }
 
-    opts.sources           = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
-  end
+    opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "emoji" } }))
+  end,
 }

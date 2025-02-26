@@ -87,7 +87,6 @@ Map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 
 -- editor
 Map("n", "<leader>fr", ":source<CR> <bar>:lua vim.notify('File reloaded')<cr>", Opt())
-Map("n", "<leader>ff", "<Cmd>lua vim.lsp.buf.format()<CR>", Opt())
 
 --FZF lua
 Map("n", "<leader>sf", "<Cmd>FzfLua files<CR>", Opt("Find files"))
@@ -99,9 +98,24 @@ local keys = require("lazyvim.plugins.lsp.keymaps").get()
 -- lsp
 keys[#keys + 1] = { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "implementation" }
 keys[#keys + 1] = { "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" }
-keys[#keys + 1] = { "<leader>ff", "<Cmd>lua vim.lsp.buf.format()<CR>", desc = "Format" }
+keys[#keys + 1] = {
+  "<leader>ff",
+  function()
+    require("conform").format()
+  end,
+  desc = "Format",
+}
 
--- trouble
+keys[#keys + 1] = {
+  "<leader>ss",
+  function()
+    Snacks.picker.lsp_workspace_symbols({ filter = LazyVim.config.kind_filter })
+  end,
+  desc = "Symbols in file",
+}
+
+-- finder
 keys[#keys + 1] = { "gr", "<Cmd>Lspsaga finder<CR>" }
 keys[#keys + 1] = { "gd", "<Cmd>lua vim.lsp.buf.definition()<cr>" }
+
 --keys[#keys + 1] = { "gd", "<Cmd>Trouble lsp_definitions<cr>" }

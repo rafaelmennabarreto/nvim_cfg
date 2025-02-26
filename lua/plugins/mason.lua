@@ -8,6 +8,7 @@ return {
         "css-lsp",
         "html-lsp",
         "emmet-ls",
+        "eslint_d",
         "json-lsp",
         "lua-language-server",
         "prettier",
@@ -17,6 +18,6 @@ return {
       })
 
       opts.automatic_installation = false
-    end
+    end,
   }
 }

@@ -1,21 +1,31 @@
 local fileUtils = require("utils.fileUtils")
 
 return {
-  "stevearc/conform.nvim",
-  init = function()
-    local config = {
-      formatters_by_ft = {
-        lua = { "stylua" },
-        python = { "isort", "black", stop_after_first = true },
-        rust = { "rustfmt" },
-        javascript = { "eslint_d", "prettierd", "prettier" },
-        typescript = { "eslint_d", "prettierd", "prettier" },
-        html = { "prettier", "prettierd", stop_after_first = false },
-      },
-    }
-
-    require("conform").setup(config)
-  end,
+  {
+    "stevearc/conform.nvim",
+    init = function()
+      require("conform").setup({
+        format_on_save = {
+          lsp_fallback = true, -- Usa o LSP como fallback caso não tenha formatador configurado
+        },
+        --formatters = {
+        --eslint_fix = {
+        --command = "eslint_fix",
+        --args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
+        --stdin = true,
+        --},
+        --},
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = { "isort", "black" },
+          rust = { "rustfmt" },
+          javascript = { "eslint_d", "prettierd", "prettier" },
+          typescript = { "eslint_d", "prettierd", "prettier" },
+          html = { "prettier", "prettierd" },
+        },
+      })
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     dependencies = {

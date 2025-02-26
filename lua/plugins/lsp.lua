@@ -36,10 +36,8 @@ return {
       config.inlay_hints = { enabled = false }
       config.autoformat = false
 
-      config.diagnostics = {
-        float = {
-          border = "rounded",
-        },
+      config.diagnostics.float = {
+        border = "rounded",
       }
 
       return config

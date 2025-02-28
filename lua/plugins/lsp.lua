@@ -8,13 +8,6 @@ return {
         format_on_save = {
           lsp_fallback = true, -- Usa o LSP como fallback caso não tenha formatador configurado
         },
-        --formatters = {
-        --eslint_fix = {
-        --command = "eslint_fix",
-        --args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
-        --stdin = true,
-        --},
-        --},
         formatters_by_ft = {
           lua = { "stylua" },
           python = { "isort", "black" },
@@ -22,6 +15,24 @@ return {
           javascript = { "eslint_d", "prettierd", "prettier" },
           typescript = { "eslint_d", "prettierd", "prettier" },
           html = { "prettier", "prettierd" },
+        },
+      })
+    end,
+  },
+  {
+    "nvimdev/lspsaga.nvim",
+    enabled = true,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("lspsaga").setup({
+        symbol_in_winbar = {
+          enable = false, -- Desabilita os breadcrumbs
+        },
+        ui = {
+          code_action = "",
         },
       })
     end,
@@ -40,9 +51,30 @@ return {
       { "<leader>rn", "<Cmd>Lspsaga rename<cr>", desc = "Replace references" },
       { "<leader>.", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Code actions" },
       { "<leader>od", "<Cmd>Trouble diagnostics<CR>", desc = "File diagnostics" },
-      { "gr", "<Cmd>Trouble lsp_references<CR>", desc = "lsp references" },
     },
     opts = function(_, config)
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      keys[#keys + 1] = { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "implementation" }
+      keys[#keys + 1] = { "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" }
+      keys[#keys + 1] = { "gr", "<Cmd>Lspsaga finder<CR>" }
+      keys[#keys + 1] = { "gd", "<Cmd>lua vim.lsp.buf.definition()<cr>" }
+
+      keys[#keys + 1] = {
+        "<leader>ff",
+        function()
+          require("conform").format()
+        end,
+        desc = "Format",
+      }
+
+      keys[#keys + 1] = {
+        "<leader>ss",
+        function()
+          Snacks.picker.lsp_symbols()
+        end,
+        desc = "Symbols in file",
+      }
+
       config.inlay_hints = { enabled = false }
       config.autoformat = false
 

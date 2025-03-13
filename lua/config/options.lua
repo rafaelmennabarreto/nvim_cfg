@@ -6,5 +6,7 @@ vim.opt.expandtab = true -- Convert tabs to spaces
 vim.opt.shiftwidth = 2 -- Number of spaces for each indentation
 vim.opt.tabstop = 2 -- Number of spaces that a tab counts for
 vim.opt.softtabstop = 2
-vim.g.autoformat = true
+vim.opt.colorcolumn = "160"
 vim.opt.fileformats = { "unix", "dos" }
+
+vim.g.autoformat = true

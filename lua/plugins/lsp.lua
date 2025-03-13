@@ -3,20 +3,22 @@ local fileUtils = require("utils.fileUtils")
 return {
   {
     "stevearc/conform.nvim",
-    init = function()
-      require("conform").setup({
-        format_on_save = {
-          lsp_fallback = true, -- Usa o LSP como fallback caso não tenha formatador configurado
-        },
+
+    opts = function()
+      ---@type conform.setupOpts
+      local opts = {
         formatters_by_ft = {
           lua = { "stylua" },
           python = { "isort", "black" },
           rust = { "rustfmt" },
-          javascript = { "eslint_d", "prettierd", "prettier" },
-          typescript = { "eslint_d", "prettierd", "prettier" },
-          html = { "prettier", "prettierd" },
+          javascript = { "eslint_d", "prettierd" },
+          typescript = { "eslint_d", "prettierd" },
+          html = { "prettierd", lsp_format = "fallback" },
+          htmlangular = { "prettierd", lsp_format = "fallback" },
         },
-      })
+      }
+
+      return opts
     end,
   },
   {
@@ -35,6 +37,28 @@ return {
           code_action = "",
         },
       })
+    end,
+  },
+  {
+    "williamboman/mason.nvim",
+    opts = function(_, opts)
+      vim.list_extend(opts.ensure_installed, {
+        "angular-language-server",
+        "typescript-language-server",
+        "css-lsp",
+        "html-lsp",
+        "emmet-ls",
+        "eslint_d",
+        "json-lsp",
+        "lua-language-server",
+        "prettier",
+        "prettierd",
+        "shfmt",
+        "stylua",
+        "tailwindcss-language-server",
+      })
+
+      opts.automatic_installation = false
     end,
   },
   {
@@ -76,7 +100,7 @@ return {
       }
 
       config.inlay_hints = { enabled = false }
-      config.autoformat = false
+      config.autoformat = vim.g.autoformat
 
       config.diagnostics.float = {
         border = "rounded",

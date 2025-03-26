@@ -1,5 +1,3 @@
-local fileUtils = require("utils.fileUtils")
-
 return {
   {
     "stevearc/conform.nvim",
@@ -15,6 +13,7 @@ return {
           typescript = { "eslint_d", "prettierd" },
           html = { "prettierd", lsp_format = "fallback" },
           htmlangular = { "prettierd", lsp_format = "fallback" },
+          css = { "prettierd", lsp_format = "fallback" },
         },
       }
 
@@ -81,7 +80,8 @@ return {
       keys[#keys + 1] = { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "implementation" }
       keys[#keys + 1] = { "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" }
       keys[#keys + 1] = { "gr", "<Cmd>Lspsaga finder<CR>" }
-      keys[#keys + 1] = { "gd", "<Cmd>lua vim.lsp.buf.definition()<cr>" }
+      keys[#keys + 1] = { "gd", "<Cmd>Trouble lsp_definitions<cr>" }
+      --keys[#keys + 1] = { "gd", "<Cmd>lua vim.lsp.buf.definition()<cr>" }
 
       keys[#keys + 1] = {
         "<leader>ff",

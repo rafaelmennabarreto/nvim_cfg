@@ -1,5 +1,70 @@
 local fileExplorer = require("utils.fileExplorer")
+
 return {
+  {
+    "folke/snacks.nvim",
+    keys = {
+      {
+        "<leader>oe",
+        "<cmd>lua Snacks.explorer.open()<cr>",
+        desc = "Gitsigns blame line",
+        remap = true,
+      },
+    },
+    ---@type snacks.Config
+    opts = {
+      explorer = {
+        -- your explorer configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      },
+      picker = {
+        sources = {
+          explorer = {
+            auto_close = true,
+            layout = {
+              fullscreen = true,
+            },
+            win = {
+              list = {
+                keys = {
+                  ["<BS>"] = "explorer_up",
+                  ["l"] = "confirm",
+                  ["h"] = "explorer_close", -- close directory
+                  ["n"] = "explorer_add",
+                  ["d"] = "explorer_del",
+                  ["r"] = "explorer_rename",
+                  ["c"] = "explorer_copy",
+                  ["m"] = "explorer_move",
+                  ["o"] = "confirm",
+                  ["P"] = "toggle_preview",
+                  ["y"] = { "explorer_yank", mode = { "n", "x" } },
+                  ["p"] = "explorer_paste",
+                  ["u"] = "explorer_update",
+                  ["<c-c>"] = "tcd",
+                  ["<leader>/"] = "picker_grep",
+                  ["<c-t>"] = "terminal",
+                  ["."] = "explorer_focus",
+                  ["I"] = "toggle_ignored",
+                  ["H"] = "toggle_hidden",
+                  ["Z"] = "explorer_close_all",
+                  ["]g"] = "explorer_git_next",
+                  ["[g"] = "explorer_git_prev",
+                  ["]d"] = "explorer_diagnostic_next",
+                  ["[d"] = "explorer_diagnostic_prev",
+                  ["]w"] = "explorer_warn_next",
+                  ["[w"] = "explorer_warn_prev",
+                  ["]e"] = "explorer_error_next",
+                  ["[e"] = "explorer_error_prev",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+
   {
     "echasnovski/mini.files",
     enabled = false,
@@ -67,7 +132,7 @@ return {
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
-    enabled = true,
+    enabled = false,
     --branch = "v3.x",
     cmd = "Neotree",
     keys = {

@@ -11,7 +11,7 @@ return {
         preset = "enter", -- Preset que define o comportamento padrão das teclas
         ["<Tab>"] = { "select_next", "snippet_forward", "fallback" }, -- Mapeia <Tab> para navegar e expandir snippets
         ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" }, -- Mapeia Shift+<Tab> para navegar para trás e retroceder snippets
-        ["<CR>"] = { "select_accept_and_enter" },
+        ["<CR>"] = { "select_and_accept", "fallback" },
       },
       appearance = {
         -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'

@@ -2,7 +2,6 @@ return {
   {
     "Saghen/blink.cmp",
     version = "1.*",
-    -- optional: provides snippets for the snippet source
     dependencies = { "rafamadriz/friendly-snippets" },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -11,18 +10,17 @@ return {
         preset = "enter", -- Preset que define o comportamento padrão das teclas
         ["<Tab>"] = { "select_next", "snippet_forward", "fallback" }, -- Mapeia <Tab> para navegar e expandir snippets
         ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" }, -- Mapeia Shift+<Tab> para navegar para trás e retroceder snippets
-        ["<CR>"] = { "select_and_accept", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
       },
       appearance = {
-        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        -- Adjusts spacing to ensure icons are aligned
         nerd_font_variant = "mono",
       },
-      -- (Default) Only show the documentation popup when manually triggered
-      completion = { documentation = { auto_show = false } },
-
-      -- Default list of enabled providers defined so that you can extend it
-      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      completion = {
+        documentation = {
+          auto_show = false,
+        },
+        list = { selection = { preselect = false, auto_insert = true } },
+      },
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
       },

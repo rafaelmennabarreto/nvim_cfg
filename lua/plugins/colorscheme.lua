@@ -2,12 +2,15 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "doom-one",
     },
   },
   {
+    "NTBBloodbath/doom-one.nvim",
+  },
+  {
     "folke/tokyonight.nvim",
-    enabled = false,
+    enabled = true,
     opts = {
       transparent = true,
       styles = {
@@ -32,21 +35,21 @@ return {
     "rose-pine/neovim",
     name = "rose-pine",
     priority = 1000,
-    enabled = false,
+    enabled = true,
     opts = function()
       require("rose-pine").setup({
         variant = "moon", -- auto, main, moon, or dawn
         styles = {
           bold = true,
           italic = true,
-          transparency = true,
+          transparency = false,
         },
       })
     end,
   },
   {
     "rebelot/kanagawa.nvim",
-    enabled = false,
+    enabled = true,
     opts = function()
       require("kanagawa").setup({
         compile = false,

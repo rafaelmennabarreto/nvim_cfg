@@ -14,6 +14,11 @@ return {
           html = { "prettierd", lsp_format = "fallback" },
           htmlangular = { "prettierd", lsp_format = "fallback" },
           css = { "prettierd", lsp_format = "fallback" },
+          scss = { "prettierd", lsp_format = "fallback" },
+          gopls = { "gofumpt", lsp_format = "fallback" },
+        },
+        default_format_opts = {
+          lsp_format = "fallback",
         },
       }
 
@@ -39,7 +44,14 @@ return {
     end,
   },
   {
+    "mason-org/mason-lspconfig.nvim",
+    --TODO: remove this line before lazyvim update
+    version = "^1.0.0",
+  },
+  {
     "williamboman/mason.nvim",
+    --TODO: remove this line before lazyvim update
+    version = "^1.0.0",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "angular-language-server",
@@ -78,7 +90,7 @@ return {
     opts = function(_, config)
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       keys[#keys + 1] = { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "implementation" }
-      keys[#keys + 1] = { "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" }
+      --keys[#keys + 1] = { "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" }
       keys[#keys + 1] = { "gr", "<Cmd>Lspsaga finder<CR>" }
       keys[#keys + 1] = { "gd", "<Cmd>Trouble lsp_definitions<cr>" }
       --keys[#keys + 1] = { "gd", "<Cmd>lua vim.lsp.buf.definition()<cr>" }

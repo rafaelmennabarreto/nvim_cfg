@@ -1,16 +1,18 @@
 return {
   {
     "Saghen/blink.cmp",
-    version = "1.*",
+    --version = "1.*",
     dependencies = { "rafamadriz/friendly-snippets" },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      --snippets = { preset = "luasnip" },
       keymap = {
         preset = "enter", -- Preset que define o comportamento padrão das teclas
         ["<Tab>"] = { "select_next", "snippet_forward", "fallback" }, -- Mapeia <Tab> para navegar e expandir snippets
-        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" }, -- Mapeia Shift+<Tab> para navegar para trás e retroceder snippets
-        ["<CR>"] = { "accept", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward" }, -- Mapeia Shift+<Tab> para navegar para trás e retroceder snippets
+        ["<Esc>"] = { "fallback_to_mappings" },
+        ["<CR>"] = { "select_and_accept", "fallback" },
       },
       appearance = {
         nerd_font_variant = "mono",
@@ -19,14 +21,30 @@ return {
         documentation = {
           auto_show = false,
         },
+        ghost_text = {
+          enabled = true,
+          show_with_menu = false,
+        },
+        menu = {
+          draw = {
+            columns = {
+              { "kind_icon", gap = 1 },
+              { "label", "label_description", gap = 1 },
+              { "kind", gap = 1 },
+            },
+          },
+        },
         list = { selection = { preselect = false, auto_insert = true } },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lsp", "path", "snippets", "buffer", "codeium" },
+        providers = {
+          codeium = { name = "Codeium", module = "codeium.blink", async = true },
+        },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" },
     },
-    opts_extend = { "sources.default" },
+    --opts_extend = { "sources.default" },
   },
   {
     "hrsh7th/nvim-cmp",

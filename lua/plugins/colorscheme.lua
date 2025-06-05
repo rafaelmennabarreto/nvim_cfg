@@ -2,7 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "doom-one",
+      colorscheme = "solarized-osaka",
     },
   },
   {
@@ -42,7 +42,7 @@ return {
         styles = {
           bold = true,
           italic = true,
-          transparency = false,
+          transparency = true,
         },
       })
     end,
@@ -65,6 +65,16 @@ return {
           },
         },
       })
+    end,
+  },
+  {
+    "craftzdog/solarized-osaka.nvim",
+    lazy = true,
+    priority = 1000,
+    opts = function()
+      return {
+        transparent = true,
+      }
     end,
   },
 }

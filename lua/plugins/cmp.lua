@@ -27,11 +27,24 @@ return {
     opts = {
       --snippets = { preset = "luasnip" },
       keymap = {
-        preset = "enter", -- Preset que define o comportamento padrão das teclas
+        preset = "super-tab", -- Preset que define o comportamento padrão das teclas
         ["<Tab>"] = { "select_next", "snippet_forward", "fallback" }, -- Mapeia <Tab> para navegar e expandir snippets
-        ["<S-Tab>"] = { "select_prev", "snippet_backward" }, -- Mapeia Shift+<Tab> para navegar para trás e retroceder snippets
-        ["<Esc>"] = { "cancel", "fallback_to_mappings" },
-        ["<CR>"] = { "show_and_insert", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" }, -- Mapeia Shift+<Tab> para navegar para trás e retroceder snippets
+        ["<Esc>"] = {
+          function(cmp)
+            if cmp.is_visible() then
+              cmp.cancel({
+                callback = function()
+                  cmp.hide()
+                  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+                end,
+              })
+            else
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+            end
+          end,
+        },
+        ["<CR>"] = { "select_and_accept", "fallback" },
       },
       appearance = {
         nerd_font_variant = "mono",

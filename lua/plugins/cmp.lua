@@ -1,4 +1,23 @@
 return {
+  --937667b2cadc7905e6b9ba18ecf84694cf227567
+  {
+    "Exafunction/windsurf.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup({
+        enable_cmp_source = false,
+        virtual_text = {
+          enabled = true,
+          key_bindings = {
+            accept = "<Right>",
+          },
+        },
+      })
+    end,
+  },
   {
     "Saghen/blink.cmp",
     --version = "1.*",
@@ -11,8 +30,8 @@ return {
         preset = "enter", -- Preset que define o comportamento padrão das teclas
         ["<Tab>"] = { "select_next", "snippet_forward", "fallback" }, -- Mapeia <Tab> para navegar e expandir snippets
         ["<S-Tab>"] = { "select_prev", "snippet_backward" }, -- Mapeia Shift+<Tab> para navegar para trás e retroceder snippets
-        ["<Esc>"] = { "fallback_to_mappings" },
-        ["<CR>"] = { "select_and_accept", "fallback" },
+        ["<Esc>"] = { "cancel", "fallback_to_mappings" },
+        ["<CR>"] = { "show_and_insert", "fallback" },
       },
       appearance = {
         nerd_font_variant = "mono",

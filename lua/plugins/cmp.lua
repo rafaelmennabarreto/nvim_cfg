@@ -1,27 +1,9 @@
 return {
-  --937667b2cadc7905e6b9ba18ecf84694cf227567
-  {
-    "Exafunction/windsurf.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    config = function()
-      require("codeium").setup({
-        enable_cmp_source = false,
-        virtual_text = {
-          enabled = true,
-          key_bindings = {
-            accept = "<Right>",
-          },
-        },
-      })
-    end,
-  },
   {
     "Saghen/blink.cmp",
     --version = "1.*",
     dependencies = { "rafamadriz/friendly-snippets" },
+    enabled = true,
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -35,6 +17,7 @@ return {
             if cmp.is_visible() then
               cmp.cancel({
                 callback = function()
+                  require("blink.cmp.completion.list").undo_preview()
                   cmp.hide()
                   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
                 end,
@@ -58,6 +41,7 @@ return {
           show_with_menu = false,
         },
         menu = {
+          border = "rounded",
           draw = {
             columns = {
               { "kind_icon", gap = 1 },
@@ -69,12 +53,11 @@ return {
         list = { selection = { preselect = false, auto_insert = true } },
       },
       sources = {
-        default = { "lsp", "path", "snippets", "buffer", "codeium" },
-        providers = {
-          codeium = { name = "Codeium", module = "codeium.blink", async = true },
-        },
+        default = { "lsp", "path", "snippets", "buffer" },
       },
       fuzzy = { implementation = "prefer_rust_with_warning" },
+      snippets = { preset = "luasnip" },
+      signature = { enabled = true },
     },
     --opts_extend = { "sources.default" },
   },

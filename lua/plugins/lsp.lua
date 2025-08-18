@@ -93,7 +93,7 @@ return {
       keys[#keys + 1] = { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "implementation" }
       --keys[#keys + 1] = { "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" }
       keys[#keys + 1] = { "gr", "<Cmd>Lspsaga finder<CR>" }
-      keys[#keys + 1] = { "gd", "<Cmd>Trouble lsp_definitions<cr>" }
+      keys[#keys + 1] = { "gd", "<Cmd>Lspsaga goto_definition<cr>" }
       --keys[#keys + 1] = { "gd", "<Cmd>lua vim.lsp.buf.definition()<cr>" }
 
       keys[#keys + 1] = {

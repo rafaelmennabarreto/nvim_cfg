@@ -1,93 +1,89 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+
+local map = require("utils.keymapUtils").map
+local opt = require("utils.keymapUtils").opt
+
 vim.g.mapleader = " "
 vim.g.ctrlp_show_hidden = 1
 
-function Map(mode, key, command, opt, desc)
-  vim.api.nvim_set_keymap(mode, key, command, opt or Opt())
-end
-
-function Opt(desc, silent, noremap, expr)
-  return {
-    silent = silent or true,
-    noremap = noremap or true,
-    expr = expr or false,
-    desc = desc or nil,
-  }
-end
-
 --vim default keybindings remap
-Map("i", "(", "()<Esc>i", Opt())
-Map("i", "{", "{}<Esc>i", Opt())
-Map("i", "[", "[]<Esc>i", Opt())
+map("i", "(", "()<Esc>i", opt())
+map("i", "{", "{}<Esc>i", opt())
+map("i", "[", "[]<Esc>i", opt())
 
-Map("n", "<C-w>", ":bd<cr>", Opt())
-Map("n", "<C-q>", ":bd<cr>", Opt())
-Map("n", "<C-s>", ":w<cr>", Opt())
-Map("i", "<C-s>", "<esc><esc>:w<cr>", Opt())
-Map("n", "<Tab>", ":BufferLineCycleNext<cr>", Opt())
-Map("n", "<S-Tab>", ":BufferLineCyclePrev<cr>", Opt())
+map("n", "<C-w>", ":bd<cr>", opt())
+map("n", "<C-q>", ":bd<cr>", opt())
+map("n", "<C-s>", ":w<cr>", opt())
+map("i", "<C-s>", "<esc><esc>:w<cr>", opt())
+map("n", "<Tab>", ":BufferLineCycleNext<cr>", opt())
+map("n", "<S-Tab>", ":BufferLineCyclePrev<cr>", opt())
 
-Map("i", "jj", "<Esc>", Opt())
-Map("i", "kk", "<Esc>", Opt())
-Map("i", "<C-e>", "<Esc> <S-$>a", Opt())
+map("i", "jj", "<Esc>", opt())
+map("i", "kk", "<Esc>", opt())
+map("i", "<C-e>", "<Esc> <S-$>a", opt())
 
-Map("n", "W", "ciw", Opt()) -- change word
-Map("n", "<C-d>", "yyp", Opt()) -- duplicate line
+map("n", "W", "ciw", opt()) -- change word
+map("n", "<C-d>", "yyp", opt()) -- duplicate line
 
 -- Window
 --Map('n', '<Leader>w/', ':vsplit<cr>', Opt())
-Map("n", "sv", ":vsplit<cr>", Opt())
-Map("n", "ss", ":split<cr>", Opt())
+map("n", "sv", ":vsplit<cr>", opt())
+map("n", "ss", ":split<cr>", opt())
 --Map('n', '<Leader>w-', ':split<cr>', Opt())
-Map("n", "<Leader>wh", ":wincmd h<cr>", Opt())
-Map("n", "<Leader>wj", ":wincmd j<cr>", Opt())
-Map("n", "<Leader>wk", ":wincmd k<cr>", Opt())
-Map("n", "<Leader>wl", ":wincmd l<cr>", Opt())
-Map("n", "+", ":vertical resize +10<CR>", Opt())
-Map("n", "_", ":vertical resize -10<CR>", Opt())
+map("n", "<Leader>wh", ":wincmd h<cr>", opt())
+map("n", "<Leader>wj", ":wincmd j<cr>", opt())
+map("n", "<Leader>wk", ":wincmd k<cr>", opt())
+map("n", "<Leader>wl", ":wincmd l<cr>", opt())
+map("n", "+", ":vertical resize +10<CR>", opt())
+map("n", "_", ":vertical resize -10<CR>", opt())
 
 -- actions
-Map("n", "<leader>u", ":UndotreeToggle<cr>", Opt())
+map("n", "<leader>u", ":UndotreeToggle<cr>", opt())
 
 -- move line
-Map("v", "J", ":m '>+1<CR>gv=gv", Opt())
-Map("v", "K", ":m '<-2<CR>gv=gv", Opt())
-Map("i", "<C-j>", "<esc>:m .+1<CR>==", Opt())
-Map("i", "<C-k>", "<esc>:m .-2<CR>==", Opt())
-Map("n", "<Leader>j", ":m .+1<CR>==", Opt())
-Map("n", "<Leader>k", ":m .-2<CR>==", Opt())
-Map("v", ">", ">gv", Opt())
-Map("v", "<", "<gv", Opt())
+map("v", "J", ":m '>+1<CR>gv=gv", opt())
+map("v", "K", ":m '<-2<CR>gv=gv", opt())
+map("i", "<C-j>", "<esc>:m .+1<CR>==", opt())
+map("i", "<C-k>", "<esc>:m .-2<CR>==", opt())
+map("n", "<Leader>j", ":m .+1<CR>==", opt())
+map("n", "<Leader>k", ":m .-2<CR>==", opt())
+map("v", ">", ">gv", opt())
+map("v", "<", "<gv", opt())
 
 -- Comment
-Map("n", "<leader>;", "<plug>NERDCommenterToggle", Opt())
-Map("v", "<leader>;", "<plug>NERDCommenterToggle", Opt())
-Map("x", "<leader>;", "<plug>NERDCommenterToggle", Opt())
-Map("n", "gc", "<plug>NERDCommenterToggle", Opt())
-Map("v", "gc", "<plug>NERDCommenterToggle", Opt())
-Map("x", "gc", "<plug>NERDCommenterToggle", Opt())
+map("n", "<leader>;", "<plug>NERDCommenterToggle", opt())
+map("v", "<leader>;", "<plug>NERDCommenterToggle", opt())
+map("x", "<leader>;", "<plug>NERDCommenterToggle", opt())
+map("n", "gc", "<plug>NERDCommenterToggle", opt())
+map("v", "gc", "<plug>NERDCommenterToggle", opt())
+map("x", "gc", "<plug>NERDCommenterToggle", opt())
 
 -- better wrap line
-Map("n", "<C-j>", "i<cr><Tab><esc>", Opt())
-Map("n", "<C-k>", "hvb<S-e>ld<esc>", Opt())
+map("n", "<C-j>", "i<cr><Tab><esc>", opt())
+map("n", "<C-k>", "hvb<S-e>ld<esc>", opt())
 
 -- better navigation
-Map("i", "<C-k>", "<up>", Opt())
-Map("i", "<C-j>", "<down>", Opt())
-Map("i", "<C-h>", "<left>", Opt())
-Map("i", "<C-l>", "<right>", Opt())
+map("i", "<C-k>", "<up>", opt())
+map("i", "<C-j>", "<down>", opt())
+map("i", "<C-h>", "<left>", opt())
+map("i", "<C-l>", "<right>", opt())
 
 -- Tmux
-Map("n", "<C-h>", ":<C-U>TmuxNavigateLeft<cr>")
-Map("n", "<C-j>", ":<C-U>TmuxNavigateDown<cr>")
-Map("n", "<C-k>", ":<C-U>TmuxNavigateUp<cr>")
-Map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
+map("n", "<C-h>", ":<C-U>TmuxNavigateLeft<cr>")
+map("n", "<C-j>", ":<C-U>TmuxNavigateDown<cr>")
+map("n", "<C-k>", ":<C-U>TmuxNavigateUp<cr>")
+map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 
 -- editor
-Map("n", "<leader>fr", ":source<CR> <bar>:lua vim.notify('File reloaded')<cr>", Opt())
+map("n", "<leader>fr", ":source<CR> <bar>:lua vim.notify('File reloaded')<cr>", opt())
 
 --FZF lua
-Map("n", "<leader>sf", "<Cmd>FzfLua files<CR>", Opt("Find files"))
-Map("n", "<leader>sp", "<Cmd>FzfLua grep_project<CR>", Opt("Search word"))
+--Map("n", "<leader>sf", "<Cmd>FzfLua files<CR>", Opt("Find files"))
+--Map("n", "<leader>sp", "<Cmd>FzfLua grep_project<CR>", Opt("Search word"))
+
+return {
+  map,
+  opt,
+}

@@ -8,6 +8,10 @@ m.find_word = function()
   require("telescope.builtin").live_grep()
 end
 
+m.grep_string = function()
+  require("telescope.builtin").grep_string()
+end
+
 m.fileExplorer = function()
   local telescope = require("telescope")
 
@@ -23,7 +27,7 @@ m.fileExplorer = function()
     grouped = true,
     previewer = false,
     initial_mode = "normal",
-    layout_config = { height = 40 }
+    layout_config = { height = 40 },
   })
 end
 

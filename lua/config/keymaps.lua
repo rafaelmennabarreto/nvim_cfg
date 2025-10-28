@@ -3,6 +3,7 @@
 -- Add any additional keymaps here
 
 local map = require("utils.keymapUtils").map
+local lmap = require("utils.keymapUtils").lmap
 local opt = require("utils.keymapUtils").opt
 
 vim.g.mapleader = " "
@@ -15,8 +16,8 @@ map("i", "[", "[]<Esc>i", opt())
 
 map("n", "<C-w>", ":bd<cr>", opt())
 map("n", "<C-q>", ":bd<cr>", opt())
-map("n", "<C-s>", ":w<cr>", opt())
-map("i", "<C-s>", "<esc><esc>:w<cr>", opt())
+lmap("n", "<C-s>", ":w<cr>", { desc = "save file" })
+lmap("i", "<C-s>", "<esc><esc>:w<cr>", { desc = "save file" })
 map("n", "<Tab>", ":BufferLineCycleNext<cr>", opt())
 map("n", "<S-Tab>", ":BufferLineCyclePrev<cr>", opt())
 
@@ -78,10 +79,18 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 
 -- editor
 map("n", "<leader>fr", ":source<CR> <bar>:lua vim.notify('File reloaded')<cr>", opt())
+map("v", "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "code actions" })
 
---FZF lua
---Map("n", "<leader>sf", "<Cmd>FzfLua files<CR>", Opt("Find files"))
---Map("n", "<leader>sp", "<Cmd>FzfLua grep_project<CR>", Opt("Search word"))
+--telescope
+lmap("n", "<leader>sp", "<Cmd>Telescope live_grep<CR>", { desc = "Telescope live grep" })
+lmap("n", "<leader>sw", ":Telescope grep_string<cr>", { desc = "Telescope grp string" })
+lmap("n", "<leader>sg", "<Cmd>Telescope find_files<CR>", { desc = "Telescope find files" })
+
+lmap("v", "<leader>sw", function()
+  vim.cmd('normal! "vy')
+  local text = vim.fn.getreg("v")
+  require("telescope.builtin").grep_string({ search = text })
+end, { desc = "Grep selection with Telescope" })
 
 return {
   map,

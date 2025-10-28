@@ -22,10 +22,26 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "qf",
 })
 
+-- auto organizer imports on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("organise_imports", { clear = true }),
+  pattern = "*.ts, *.js",
+  callback = function()
+    -- Add missing imports
+    vim.lsp.buf.code_action({
+      apply = true,
+      context = { only = { "source.addMissingImports.ts" }, diagnostics = {} },
+    })
+
+    -- Remove unused imports
+    vim.lsp.buf.code_action({
+      apply = true,
+      context = { only = { "source.removeUnused.ts" }, diagnostics = {} },
+    })
+  end,
+})
+
 -- lint on save
-
-
-
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function(args)

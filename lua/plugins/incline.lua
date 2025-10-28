@@ -1,7 +1,7 @@
 return {
-  'b0o/incline.nvim',
+  "b0o/incline.nvim",
   config = function()
-    require('incline').setup({
+    require("incline").setup({
       window = { margin = { vertical = 0, horizontal = 1 } },
       hide = {
         cursorline = true,
@@ -17,5 +17,5 @@ return {
       end,
     })
   end,
-  event = 'VeryLazy',
+  event = "VeryLazy",
 }

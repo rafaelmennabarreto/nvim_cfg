@@ -1,7 +1,8 @@
+local map = require("utils.keymapUtils").map
+
 return {
   {
     "stevearc/conform.nvim",
-
     opts = function()
       ---@type conform.setupOpts
       local opts = {
@@ -45,14 +46,7 @@ return {
     end,
   },
   {
-    "mason-org/mason-lspconfig.nvim",
-    --TODO: remove this line before lazyvim update
-    version = "^1.0.0",
-  },
-  {
-    "williamboman/mason.nvim",
-    --TODO: remove this line before lazyvim update
-    version = "^1.0.0",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "angular-language-server",
@@ -74,10 +68,16 @@ return {
     end,
   },
   {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "master",
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter").setup()
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "tamago324/nlsp-settings.nvim",
-    },
     keys = {
       { "<C-n>", "<Cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next error" },
       { "<C-p>", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", desc = "Previous error" },
@@ -88,38 +88,43 @@ return {
       { "<leader>.", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Code actions" },
       { "<leader>od", "<Cmd>Trouble diagnostics<CR>", desc = "File diagnostics" },
     },
-    opts = function(_, config)
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      keys[#keys + 1] = { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "implementation" }
-      --keys[#keys + 1] = { "K", "<Cmd>lua vim.lsp.buf.hover()<CR>" }
-      keys[#keys + 1] = { "gr", "<Cmd>Lspsaga finder<CR>" }
-      keys[#keys + 1] = { "gd", "<Cmd>Lspsaga goto_definition<cr>" }
-      --keys[#keys + 1] = { "gd", "<Cmd>lua vim.lsp.buf.definition()<cr>" }
+    opts = {
+      inlay_hints = { enabled = false },
+      autoformat = vim.g.autoformat,
+      diagnostics = {
+        float = {
+          border = "rounded",
+        },
+      },
+      tsserver = {
+        enabled = false,
+      },
+      servers = {
+        ["*"] = {
+          organize_imports_on_format = true,
 
-      keys[#keys + 1] = {
-        "<leader>ff",
-        function()
-          require("conform").format()
-        end,
-        desc = "Format",
-      }
-
-      keys[#keys + 1] = {
-        "<leader>ss",
-        function()
-          Snacks.picker.lsp_symbols()
-        end,
-        desc = "Symbols in file",
-      }
-
-      config.inlay_hints = { enabled = false }
-      config.autoformat = vim.g.autoformat
-
-      config.diagnostics.float = {
-        border = "rounded",
-      }
-
-      return config
-    end,
+          keys = {
+            { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "goto implementation" },
+            { "gd", "<Cmd>Telescope lsp_definitions<cr>", desc = "goto definitions" },
+            { "gr", "<Cmd>Lspsaga finder<CR>", desc = "goto references" },
+            { "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code actions" },
+            {
+              "<leader>ff",
+              function()
+                require("conform").format()
+              end,
+              desc = "Format",
+            },
+            {
+              "<leader>ss",
+              function()
+                Snacks.picker.lsp_symbols()
+              end,
+              desc = "goto symbol",
+            },
+          },
+        },
+      },
+    },
   },
 }

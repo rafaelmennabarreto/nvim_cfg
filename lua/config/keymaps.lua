@@ -14,7 +14,7 @@ map("i", "(", "()<Esc>i", opt())
 map("i", "{", "{}<Esc>i", opt())
 map("i", "[", "[]<Esc>i", opt())
 
-map("n", "<C-w>", ":bd<cr>", opt())
+map("n", "<C-w>", ":lua Snacks.bufdelete.delete()<cr>", opt())
 map("n", "<C-q>", ":bd<cr>", opt())
 lmap("n", "<C-s>", ":w<cr>", { desc = "save file" })
 lmap("i", "<C-s>", "<esc><esc>:w<cr>", { desc = "save file" })

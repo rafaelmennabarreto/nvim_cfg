@@ -78,6 +78,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    version = "*",
     keys = {
       { "<C-n>", "<Cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next error" },
       { "<C-p>", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", desc = "Previous error" },
@@ -98,11 +99,24 @@ return {
       },
       tsserver = {
         enabled = false,
+        diagnostics = {
+          underline = true,
+          update_in_insert = false, -- <- evita lag digitando
+          virtual_text = { spacing = 2, prefix = "●" },
+          severity_sort = true,
+        },
+        flags = {
+          debounce_text_changes = 150,
+          allow_incremental_sync = true,
+        },
+        on_attach = function(client)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
       },
       servers = {
         ["*"] = {
           organize_imports_on_format = true,
-
           keys = {
             { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "goto implementation" },
             { "gd", "<Cmd>Telescope lsp_definitions<cr>", desc = "goto definitions" },

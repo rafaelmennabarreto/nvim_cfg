@@ -79,7 +79,20 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 
 -- editor
 map("n", "<leader>fr", ":source<CR> <bar>:lua vim.notify('File reloaded')<cr>", opt())
-map("v", "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "code actions" })
+map("n", "<leader>lr", ":LspRestart<cr>", { desc = "restart lsp" })
+
+-- lsp
+map("n", "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "code actions" })
+map("n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "goto implementation" })
+map("n", "gd", "<Cmd>Telescope lsp_definitions<cr>", { desc = "goto definition" })
+map("n", "gr", "<Cmd>Lspsaga finder<CR>", { desc = "goto references" })
+map({ "n", "v" }, "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
+map("n", "<leader>ff", function()
+  require("conform").format()
+end, { desc = "format" })
+map("n", "<leader>ss", function()
+  Snacks.picker.lsp_symbols()
+end, { desc = "goto symbols" })
 
 --telescope
 lmap("n", "<leader>sp", "<Cmd>Telescope live_grep<CR>", { desc = "Telescope live grep" })

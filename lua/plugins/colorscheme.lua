@@ -2,7 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine",
+      colorscheme = "edge",
     },
   },
   {
@@ -10,7 +10,7 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    enabled = true,
+    enabled = false,
     opts = {
       transparent = true,
       styles = {
@@ -22,7 +22,7 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    enabled = true,
+    enabled = false,
     priority = 1000,
     init = function()
       require("catppuccin").setup({
@@ -35,7 +35,7 @@ return {
     "rose-pine/neovim",
     name = "rose-pine",
     priority = 1000,
-    enabled = true,
+    enabled = false,
     opts = function()
       require("rose-pine").setup({
         variant = "moon", -- auto, main, moon, or dawn
@@ -49,7 +49,7 @@ return {
   },
   {
     "rebelot/kanagawa.nvim",
-    enabled = true,
+    enabled = false,
     opts = function()
       require("kanagawa").setup({
         compile = false,
@@ -70,11 +70,24 @@ return {
   {
     "craftzdog/solarized-osaka.nvim",
     lazy = true,
+    enabled = false,
     priority = 1000,
     opts = function()
       return {
         transparent = true,
       }
+    end,
+  },
+  {
+    "sainnhe/edge",
+    lazy = true,
+    enabled = true,
+    priority = 1000,
+    opts = function()
+      vim.g.edge_transparent_background = 1
+      vim.g.edge_enable_italic = true
+      vim.g.edge_style = "aura"
+      vim.g.edge_better_performance = 1
     end,
   },
 }

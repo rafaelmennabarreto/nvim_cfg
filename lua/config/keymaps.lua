@@ -20,6 +20,7 @@ lmap("n", "<C-s>", ":w<cr>", { desc = "save file" })
 lmap("i", "<C-s>", "<esc><esc>:w<cr>", { desc = "save file" })
 map("n", "<Tab>", ":BufferLineCycleNext<cr>", opt())
 map("n", "<S-Tab>", ":BufferLineCyclePrev<cr>", opt())
+map("n", "<C-x>", ":BufferLineTogglePin<cr>", opt())
 
 map("i", "jj", "<Esc>", opt())
 map("i", "kk", "<Esc>", opt())
@@ -84,8 +85,7 @@ map("n", "<leader>lr", ":LspRestart<cr>", { desc = "restart lsp" })
 -- lsp
 map("n", "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "code actions" })
 map("n", "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", { desc = "goto implementation" })
-map("n", "gd", "<Cmd>Telescope lsp_definitions<cr>", { desc = "goto definition" })
-map("n", "gr", "<Cmd>Lspsaga finder<CR>", { desc = "goto references" })
+
 map({ "n", "v" }, "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", { desc = "Code actions" })
 map("n", "<leader>ff", function()
   require("conform").format()
@@ -93,11 +93,6 @@ end, { desc = "format" })
 map("n", "<leader>ss", function()
   Snacks.picker.lsp_symbols()
 end, { desc = "goto symbols" })
-
---telescope
-lmap("n", "<leader>sp", "<Cmd>Telescope live_grep<CR>", { desc = "Telescope live grep" })
-lmap("n", "<leader>sw", ":Telescope grep_string<cr>", { desc = "Telescope grp string" })
-lmap("n", "<leader>sg", "<Cmd>Telescope find_files<CR>", { desc = "Telescope find files" })
 
 lmap("v", "<leader>sw", function()
   vim.cmd('normal! "vy')

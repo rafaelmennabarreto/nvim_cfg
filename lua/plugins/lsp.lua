@@ -110,8 +110,8 @@ return {
           allow_incremental_sync = true,
         },
         on_attach = function(client)
-          client.server_capabilities.documentFormattingProvider = false
-          client.server_capabilities.documentRangeFormattingProvider = false
+          --client.server_capabilities.documentFormattingProvider = false
+          --client.server_capabilities.documentRangeFormattingProvider = false
         end,
       },
       servers = {
@@ -119,7 +119,6 @@ return {
           organize_imports_on_format = true,
           keys = {
             { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "goto implementation" },
-            { "gd", "<Cmd>Telescope lsp_definitions<cr>", desc = "goto definitions" },
             { "gr", "<Cmd>Lspsaga finder<CR>", desc = "goto references" },
             { "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code actions" },
             {

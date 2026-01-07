@@ -3,9 +3,35 @@ local map = require("utils.keymapUtils").lmap
 
 return {
   {
-    --disabled fzf lua to telescope work fine
     "ibhagwan/fzf-lua",
-    enabled = false,
+    enabled = true,
+    keys = {
+      --{
+      --"<leader>sf",
+      --"<cmd>FzfLua git_files<cr>",
+      --desc = "Telescope find files",
+      --remap = true,
+      --},
+      --{
+      --"<leader>sp",
+      --"<cmd>FzfLua live_grep<cr>",
+      --desc = "Telescope grep string",
+      --remap = true,
+      --},
+    },
+    opts = {
+      defaults = {
+        formatter = { "path.filename_first", 2 },
+      },
+      winopts = {
+        --`none|single|double|rounded|thicc|thiccc|thicccc` or a custom border character
+        border = "rounded",
+      },
+    },
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
   },
   {
     "nvim-telescope/telescope.nvim",
@@ -43,8 +69,15 @@ return {
       end, { desc = "Grep selection with Telescope" })
 
       opts.defaults = {
-        winblend = 18,
+        winblend = 0,
         layout_strategy = "horizontal",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            preview_width = 0.5,
+          },
+        },
+        sorting_strategy = "ascending",
         path_display = { filename_first = true, truncate = 4 },
         mappings = {
           n = {

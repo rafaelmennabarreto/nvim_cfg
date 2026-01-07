@@ -34,13 +34,14 @@ return {
       },
       completion = {
         documentation = {
-          auto_show = false,
+          auto_show = true,
         },
         ghost_text = {
           enabled = true,
           show_with_menu = false,
         },
         menu = {
+          auto_show = true,
           border = "rounded",
           draw = {
             columns = {
@@ -55,7 +56,7 @@ return {
       --sources = {
       --default = { "lsp", "path", "snippets", "buffer" },
       --},
-      --fuzzy = { implementation = "prefer_rust_with_warning" },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
       snippets = { preset = "luasnip" },
       signature = { enabled = true },
     },

@@ -73,7 +73,25 @@ return {
     lazy = false,
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter").setup()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "lua",
+          "javascript",
+          "typescript",
+          "html",
+          "css",
+          "json",
+          "python",
+          "bash",
+          "markdown",
+        },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+        indent = { enable = true },
+        incremental_selection = { enable = true },
+      })
     end,
   },
   {
@@ -113,6 +131,22 @@ return {
           --client.server_capabilities.documentFormattingProvider = false
           --client.server_capabilities.documentRangeFormattingProvider = false
         end,
+      },
+      vtsls = {
+        settings = {
+          typescript = {
+            inlayHints = {
+              parameterNames = { enabled = "all" },
+              variableTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+            },
+          },
+          javascript = {
+            inlayHints = {
+              parameterNames = { enabled = "all" },
+            },
+          },
+        },
       },
       servers = {
         ["*"] = {

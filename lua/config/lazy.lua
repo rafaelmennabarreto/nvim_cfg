@@ -48,3 +48,9 @@ require("lazy").setup({
     },
   },
 })
+
+-- adjust tmux error underline display
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { underline = true })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { underline = true })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { underline = true })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { underline = true })

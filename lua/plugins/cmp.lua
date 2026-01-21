@@ -1,7 +1,7 @@
 return {
   {
-    "Saghen/blink.cmp",
     --version = "1.*",
+    "Saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets" },
     enabled = true,
     ---@module 'blink.cmp'
@@ -33,6 +33,9 @@ return {
         nerd_font_variant = "mono",
       },
       completion = {
+        trigger = {
+          show_on_keyword = true,
+        },
         documentation = {
           auto_show = true,
         },
@@ -53,9 +56,14 @@ return {
         },
         list = { selection = { preselect = false, auto_insert = true } },
       },
-      --sources = {
-      --default = { "lsp", "path", "snippets", "buffer" },
-      --},
+      sources = {
+        default = {
+          "lsp",
+          "path",
+          "snippets",
+          "buffer",
+        },
+      },
       fuzzy = { implementation = "prefer_rust_with_warning" },
       snippets = { preset = "luasnip" },
       signature = { enabled = true },

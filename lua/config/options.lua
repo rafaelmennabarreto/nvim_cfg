@@ -11,3 +11,6 @@ vim.opt.fileformats = { "unix", "dos" }
 
 vim.g.autoformat = true
 vim.g.bigfile_size = 2 * 1024 * 1024
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"

@@ -50,7 +50,6 @@ return {
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "angular-language-server",
-        "typescript-language-server",
         "css-lsp",
         "html-lsp",
         "emmet-ls",
@@ -98,6 +97,7 @@ return {
     "neovim/nvim-lspconfig",
     version = "*",
     keys = {
+      --vim.lsp.buf.definition
       { "<C-n>", "<Cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next error" },
       { "<C-p>", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", desc = "Previous error" },
       { "<leader>ll", "<cmd>Lazy<cr>", desc = "Lazy plugins" },
@@ -133,17 +133,16 @@ return {
         end,
       },
       vtsls = {
+        enabled = true,
         settings = {
           typescript = {
             inlayHints = {
-              parameterNames = { enabled = "all" },
-              variableTypes = { enabled = true },
-              functionLikeReturnTypes = { enabled = true },
+              enable = false,
             },
           },
           javascript = {
             inlayHints = {
-              parameterNames = { enabled = "all" },
+              enable = false,
             },
           },
         },
@@ -152,6 +151,7 @@ return {
         ["*"] = {
           organize_imports_on_format = true,
           keys = {
+            { "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", desc = "Previous error" },
             { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "goto implementation" },
             { "gr", "<Cmd>Lspsaga finder<CR>", desc = "goto references" },
             { "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code actions" },

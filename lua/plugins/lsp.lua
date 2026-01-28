@@ -151,8 +151,12 @@ return {
         ["*"] = {
           organize_imports_on_format = true,
           keys = {
-            { "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", desc = "Previous error" },
-            { "gi", "<Cmd>lua vim.lsp.buf.implementation()<CR>", desc = "goto implementation" },
+            { "gd", "<Cmd> Lspsaga goto_definition<CR>", desc = "Previous error" },
+            {
+              "gi",
+              "<Cmd>lua vim.lsp.buf.implemenlua vim.lsp.buf.definition()tation()<CR>",
+              desc = "goto implementation",
+            },
             { "gr", "<Cmd>Lspsaga finder<CR>", desc = "goto references" },
             { "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code actions" },
             {

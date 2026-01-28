@@ -3,7 +3,7 @@ return {
     --version = "1.*",
     "Saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets" },
-    enabled = true,
+    enabled = false,
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -72,7 +72,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    enabled = false,
+    enabled = true,
     dependencies = {
       "hrsh7th/cmp-emoji",
       "petertriho/cmp-git",
@@ -215,6 +215,9 @@ return {
           cmp.config.compare.order,
         },
       }
+
+      vim.opt.pumblend = 0
+      vim.opt.winblend = 0
     end,
   },
 }

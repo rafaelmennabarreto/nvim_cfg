@@ -104,7 +104,8 @@ return {
       { "<leader>lr", "<cmd>LspRestart<cr>", desc = "Lsp Restart" },
       { "<leader>rp", "*:%s///g<left><left>", desc = "Replace all occurences" },
       { "<leader>rn", "<Cmd>Lspsaga rename<cr>", desc = "Replace references" },
-      { "<leader>.", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Code actions" },
+      { "<leader>.", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "Code actions", mode = { "n", "v" } },
+      { "<C-.>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", desc = "code actions", mode = { "n", "v" } },
       { "<leader>od", "<Cmd>Trouble diagnostics<CR>", desc = "File diagnostics" },
     },
     opts = {

@@ -170,11 +170,10 @@ return {
 
       opts.window = {
         completion = {
-          border = "rounded",
           winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
         },
+
         documentation = {
-          border = "rounded",
           winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
         },
       }

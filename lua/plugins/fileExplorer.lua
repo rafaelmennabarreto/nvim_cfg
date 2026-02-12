@@ -23,7 +23,11 @@ return {
           explorer = {
             auto_close = true,
             layout = {
-              fullscreen = true,
+              fullscreen = false,
+              layout = {
+                position = "right",
+                width = 0.4,
+              },
             },
             win = {
               list = {

@@ -1,5 +1,24 @@
 return {
   {
+    "Exafunction/windsurf.nvim",
+    enabled = true,
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup({
+        enable_cmp_source = true,
+        virtual_text = {
+          enabled = false,
+          key_bindings = {
+            accept = "<Right>",
+          },
+        },
+      })
+    end,
+  },
+  {
     --version = "1.*",
     "Saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets" },
@@ -90,6 +109,8 @@ return {
       end
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
+        ["<C-@>"] = cmp.mapping.complete(),
+        ["<C-n>"] = cmp.mapping.complete(),
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -164,7 +185,7 @@ return {
         Object = "󰀚", -- Objeto genérico
         Null = "󰟢", -- Nulo (null)
         Key = "󰌋", -- Chave (mapa/dicionário)
-        Codeium = "󰘦", -- Ícone especial para IA (Codeium)
+        Codeium = "", -- Ícone especial para IA (Codeium)
         Win = "󰍰", -- Janela
       }
 
@@ -191,6 +212,10 @@ return {
       }
 
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+        { name = "codeium" },
+        { name = "nvim_lsp" },
+        { name = "path" },
+        { name = "buffer" },
         { name = "emoji" },
         { name = "git" },
         { name = "nvim_lua" },
@@ -217,6 +242,8 @@ return {
 
       vim.opt.pumblend = 0
       vim.opt.winblend = 0
+
+      return opts
     end,
   },
 }

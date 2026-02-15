@@ -98,7 +98,7 @@ return {
     version = "*",
     keys = {
       --vim.lsp.buf.definition
-      { "<C-n>", "<Cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next error" },
+      { "<C-n>", "<Cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next error", mode = { "n" } },
       { "<C-p>", "<Cmd>lua vim.diagnostic.goto_prev()<CR>", desc = "Previous error" },
       { "<leader>ll", "<cmd>Lazy<cr>", desc = "Lazy plugins" },
       { "<leader>lr", "<cmd>LspRestart<cr>", desc = "Lsp Restart" },

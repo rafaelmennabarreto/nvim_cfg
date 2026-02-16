@@ -212,10 +212,7 @@ return {
       }
 
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
-        { name = "codeium" },
-        { name = "nvim_lsp" },
-        { name = "path" },
-        { name = "buffer" },
+        { name = "codeium", group_index = 1, priority = 1000 },
         { name = "emoji" },
         { name = "git" },
         { name = "nvim_lua" },
